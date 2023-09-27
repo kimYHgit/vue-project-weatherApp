@@ -53,10 +53,10 @@ Done. Now run:
   npm run dev
 ```
 
-### tailwindcss 설치
+### tailwindcss 적용
 
 ```bash
-npm i -D tailwindcss postcss autoprefixerk
+npm i -D tailwindcss postcss autoprefixer
 ```
 
 ```bash
@@ -65,4 +65,111 @@ npx tailwindcss init -p
 
 Created Tailwind CSS config file: tailwind.config.js
 Created PostCSS config file: postcss.config.js
+```
+
+tailwind.config.js 의 코드를 수정한다.
+
+```javascript
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
+
+src/assets 폴더에 tailwind.css 추가
+
+> src/assets/tailwind.css
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+- 밑줄 경고 제거 -> "css.lint.unknownAtRules": "ignore"
+
+main.js 에 css 추가
+
+```javascript
+import "./assets/tailwind.css";
+```
+
+> tailwind.config.js 코드 수정 / index.html 코드 추가
+
+**tailwind.config.js**
+
+```javascript
+module.exports = {
+  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
+  theme: {
+    extend: {
+      colors: {
+        "weather-primary": "#00668A",
+        "weather-secondary": "#004E71",
+      },
+    },
+    fontFamily: {
+      Roboto: ["Roboto, sans-serif"],
+    },
+    container: {
+      padding: "2rem",
+      center: true,
+    },
+    screens: {
+      sm: "640px",
+      md: "768px",
+    },
+  },
+  plugins: [],
+};
+```
+
+**index.html**
+
+```html
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <title>Vite App</title>
+</head>
+```
+
+### font-awesome Link 추가
+
+- https://cdnjs.com/libraries/font-awesome
+
+```html
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <title>Vite App</title>
+</head>
 ```
